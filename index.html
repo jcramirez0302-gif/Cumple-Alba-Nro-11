@@ -263,12 +263,7 @@ footer{text-align:center;color:#fff;font-weight:600;margin-top:24px;text-shadow:
           <input type="radio" name="att" id="attNo" value="no"><label for="attNo">😢 No podré ir</label>
         </div>
       </div>
-      <div id="peopleBox">
-        <label for="people">¿Cuántas personas asistirán? (contándote)</label>
-        <select id="people" name="people">
-          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
-        </select>
-      </div>
+
       <div>
         <label for="msg">Mensaje para Alba (opcional)</label>
         <textarea id="msg" name="msg" rows="2" placeholder="¡Feliz cumple! 🎂"></textarea>
@@ -461,8 +456,7 @@ function tick(){
 tick();
 
 /* ---------- Confirmación por WhatsApp ---------- */
-const form=document.getElementById('rsvpForm'),peopleBox=document.getElementById('peopleBox');let waUrl='';
-form.querySelectorAll('input[name=att]').forEach(r=>r.addEventListener('change',()=>{peopleBox.style.display=form.att.value==='si'?'':'none';}));
+const form=document.getElementById('rsvpForm');let waUrl='';
 form.addEventListener('submit',e=>{
   e.preventDefault();
   const name=form.name.value.trim();
@@ -470,7 +464,7 @@ form.addEventListener('submit',e=>{
   if(!name){form.name.focus();return;}
   const yes=form.att.value==='si',msg=form.msg.value.trim();
   let text=yes
-    ? `¡Hola! 🎉 Confirmo mi asistencia al cumpleaños N° 11 de Alba (Pool Party) el sábado 28/11 a las 12:00 en el Club Acenespar – Camacho (frente al Wong).\n👤 ${name}\n👥 Personas: ${form.people.value}`
+    ? `¡Hola! 🎉 Confirmo mi asistencia al cumpleaños N° 11 de Alba (Pool Party) el sábado 28/11 a las 12:00 en el Club Acenespar – Camacho (frente al Wong).\n👤 ${name}`
     : `¡Hola! 😢 Lamentablemente no podré asistir al cumpleaños N° 11 de Alba el sábado 28/11.\n👤 ${name}`;
   if(msg) text+=`\n💌 Mensaje para Alba: ${msg}`;
   waUrl=(WHATSAPP?`https://wa.me/${WHATSAPP}`:'https://wa.me/')+'?text='+encodeURIComponent(text);
